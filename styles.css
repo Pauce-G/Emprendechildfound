@@ -1,0 +1,46 @@
+body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f8f8;
+      }
+      .route-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .route-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(22, 121, 78, 0.3),
+          0 4px 6px -2px rgba(22, 121, 78, 0.2);
+      }
+      .offline-ready {
+        border-left: 4px solid #16794e;
+      }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: linear-gradient(180deg, #16794e 0%, #003c17 100%);
+        transition: left 0.3s ease-in-out;
+        z-index: 50;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .sidebar.open {
+        left: 0;
+      }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 60, 23, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+        z-index: 40;
+      }
+      .overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
