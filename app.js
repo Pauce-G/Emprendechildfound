@@ -4,10 +4,21 @@ const content = document.getElementById("content");
       const overlay = document.getElementById("overlay");
       let userData = {};
 
-      function toggleSidebar() {
-        sidebar.classList.toggle("open");
-        overlay.classList.toggle("show");
-      }
+     function toggleSidebar() {
+  // Verifica si la pantalla es mayor a 768px (tablet/desktop)
+    if (window.innerWidth >= 768) {
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("show");
+    }
+  }
+
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth < 768) {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("show");
+    }
+  });
 
       function updateSidebarProfile() {
         if (userData.name) {
@@ -837,8 +848,8 @@ const content = document.getElementById("content");
         bottomNav.classList.remove("hidden");
         const mentorshipHTML = `
           <div class="p-4 bg-white rounded-xl shadow-lg mt-4">
-            <h2 class="text-3xl font-bold text-secondary-childfund mb-4">👥 Mentoría y Acompañamiento</h2>
-            <div class="bg-gradient-to-r from-primary-childfund to-secondary-childfund text-white p-6 rounded-xl mb-6">
+            <h2 class="text-3xl font-bold text-secondary-childfund mb-4">Mentoría y acompañamiento</h2>
+            <div class="bg-white text-primary-childfund p-6 rounded-xl mb-6 shadow">
             </div>
 
             <div class="mb-6">
@@ -846,7 +857,9 @@ const content = document.getElementById("content");
               
               <div class="border-2 border-primary-childfund rounded-xl p-4 mb-4 bg-accent-childfund bg-opacity-10">
                 <div class="flex items-center space-x-4 mb-3">
-                  <div class="w-16 h-16 bg-primary-childfund rounded-full flex items-center justify-center text-white text-xl font-bold">AG</div>
+                  <div class="w-16 h-16 bg-primary-childfund bg-opacity-70 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                    AG
+                  </div>
                   <div>
                     <h4 class="font-bold text-secondary-childfund">Lic. Ana González</h4>
                     <p class="text-sm text-gray-600">Especialista en Gestión Financiera</p>
@@ -860,10 +873,9 @@ const content = document.getElementById("content");
                   Solicitar Mentoría
                 </button>
               </div>
-
               <div class="border-2 border-gray-200 rounded-xl p-4 mb-4">
                 <div class="flex items-center space-x-4 mb-3">
-                  <div class="w-16 h-16 bg-secondary-childfund rounded-full flex items-center justify-center text-white text-xl font-bold">CM</div>
+                  <div class="w-16 h-16 bg-primary-childfund bg-opacity-70 rounded-full flex items-center justify-center text-white text-xl font-bold">CM</div>
                   <div>
                     <h4 class="font-bold text-secondary-childfund">Carlos Martínez</h4>
                     <p class="text-sm text-gray-600">Experto en Marketing Digital</p>
@@ -876,6 +888,7 @@ const content = document.getElementById("content");
                 <button onclick="requestMentorship('Carlos Martínez')" class="w-full bg-primary-childfund text-white py-2 rounded-lg font-semibold hover:bg-secondary-childfund transition">
                   Solicitar Mentoría
                 </button>
+                
               </div>
             </div>
 
@@ -883,6 +896,7 @@ const content = document.getElementById("content");
               <h3 class="font-bold text-secondary-childfund mb-2">📅 Mis Sesiones Programadas</h3>
               <p class="text-sm text-gray-600">No tienes sesiones programadas todavía. ¡Solicita tu primera mentoría!</p>
             </div>
+            <br><br>
           </div>
         `;
         setView(mentorshipHTML);
@@ -1427,12 +1441,12 @@ function showQuizModule() {
     }
   }
 
-  
+
+
+}
 
   
-  updateQuestion();
-  window.showQuizModule = showQuizModule;
-}
+
 
 // Hacer la función accesible globalmente
 window.showQuizModule = showQuizModule;

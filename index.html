@@ -149,16 +149,27 @@
           </svg>
         </button>
         <h1 class="text-xl font-bold text-secondary-childfund">EmprendeChildFund</h1>
-        <div class="w-6">
-          
-        </div>
+         <div class="relative"> <!-- Quité el w-6 -->
+         <div class="relative">
+    <button onclick="toggleProfileMenu()" id="profileBtn" class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 1118.879 6.196a9 9 0 01-13.758 11.608z" />
+      </svg>
+    </button>
+
+    <!-- Submenú -->
+    <div id="profileMenu" class="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg hidden z-50">
+      <a href="#" onclick="showProfile(); event.preventDefault();" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Perfil</a>
+      <a href="#" onclick="logout(); event.preventDefault();" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
+    </div>
+  </div>
       </header>
 
       <!-- Contenido Dinámico -->
       <main id="content" class="w-full max-w-xl p-4 flex-grow"></main>
 
       <!-- Navegación Inferior (Móvil) -->
-      <nav id="bottom-nav" class="fixed bottom-0 w-full max-w-xl bg-white shadow-2xl rounded-t-xl py-2 px-4 flex justify-around border-t border-gray-100 hidden">
+      <nav id="bottom-nav" class="fixed bottom-0 w-full max-w-xl bg-white shadow-2xl rounded-t-xl py-2 px-4 flex justify-around border-t border-gray-100">
         <button onclick="showRouteSelection()" class="flex flex-col items-center text-primary-childfund">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -223,5 +234,13 @@
     </div>
     <!-- Scripts -->
     <script src="app.js"></script>
+    <script>
+      function toggleProfileMenu() {
+        const menu = document.getElementById('profileMenu');
+        if (menu) {
+          menu.classList.toggle('hidden');
+        }
+      }
+    </script>
   </body>
 </html>
