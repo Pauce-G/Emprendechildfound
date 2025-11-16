@@ -1178,7 +1178,7 @@ function showQuizModule() {
         "Es solo la cantidad de plata que quiero ganar.",
         "Es solamente el producto o servicio que voy a vender."
       ],
-      correctAnswer: 0 // índice de la respuesta correcta (0 = primera opción)
+      correctAnswer: 0
     },
     {
       question: "¿Por qué es importante saber mi 'Por Qué'?",
@@ -1267,16 +1267,13 @@ function showQuizModule() {
   function updateQuestion() {
     const currentQuestion = quizQuestions[currentQuestionIndex];
     
-    // Actualizar texto de la pregunta
     questionText.textContent = currentQuestion.question;
     
-    // Actualizar progreso
     const progress = ((currentQuestionIndex) / quizQuestions.length) * 100;
     progressBar.style.width = progress + "%";
     progressText.textContent = Math.round(progress) + "%";
     currentQuestionNum.textContent = currentQuestionIndex + 1;
     
-    // Crear opciones de respuesta
     optionsContainer.innerHTML = "";
     currentQuestion.options.forEach((option, index) => {
       const optionDiv = document.createElement("div");
@@ -1293,7 +1290,6 @@ function showQuizModule() {
       optionsContainer.appendChild(optionDiv);
     });
     
-    // Restaurar respuesta previa si existe
     if (userAnswers[currentQuestionIndex] !== null) {
       document.querySelector(`input[value="${userAnswers[currentQuestionIndex]}"]`).checked = true;
       showFeedback(userAnswers[currentQuestionIndex] === currentQuestion.correctAnswer);
@@ -1305,10 +1301,8 @@ function showQuizModule() {
       nextBtn.classList.add("hidden");
     }
     
-    // Actualizar estado de botones
     prevBtn.disabled = currentQuestionIndex === 0;
     
-    // Mostrar botón finalizar en la última pregunta
     if (currentQuestionIndex === quizQuestions.length - 1 && userAnswers[currentQuestionIndex] !== null) {
       nextBtn.classList.add("hidden");
       finishBtn.classList.remove("hidden");
@@ -1346,7 +1340,6 @@ function showQuizModule() {
     }
   }
 
-  // Evento: Verificar respuesta
   verifyBtn.onclick = () => {
     const selectedOption = document.querySelector('input[name="quizAnswer"]:checked');
     
@@ -1363,7 +1356,6 @@ function showQuizModule() {
     
     showFeedback(isCorrect);
     
-    // Ocultar botón verificar y mostrar siguiente
     verifyBtn.classList.add("hidden");
     
     if (currentQuestionIndex === quizQuestions.length - 1) {
@@ -1373,7 +1365,6 @@ function showQuizModule() {
     }
   };
 
-  // Evento: Siguiente pregunta
   nextBtn.onclick = () => {
     if (currentQuestionIndex < quizQuestions.length - 1) {
       currentQuestionIndex++;
@@ -1381,7 +1372,6 @@ function showQuizModule() {
     }
   };
 
-  // Evento: Pregunta anterior
   prevBtn.onclick = () => {
     if (currentQuestionIndex > 0) {
       currentQuestionIndex--;
@@ -1389,7 +1379,6 @@ function showQuizModule() {
     }
   };
 
-  // Evento: Finalizar quiz
   finishBtn.onclick = () => {
     showQuizResults();
   };
@@ -1421,7 +1410,7 @@ function showQuizModule() {
             </button>
           ` : `
             <p class="text-gray-700 mb-6">Te recomendamos revisar el contenido del video nuevamente para reforzar tu aprendizaje.</p>
-            <button onclick="showModuleContent('M1')" class="w-full bg-yellow-300 text-white font-bold py-3 rounded-xl hover:bg-yellow-600 transition mb-3">
+            <button onclick="showModuleContent('M1')" class="w-full bg-yellow-500 text-white font-bold py-3 rounded-xl hover:bg-yellow-600 transition mb-3">
               Revisar Contenido
             </button>
             <button onclick="showQuizModule()" class="w-full bg-primary-childfund text-white font-bold py-3 rounded-xl hover:bg-secondary-childfund transition">
@@ -1433,20 +1422,7 @@ function showQuizModule() {
     `;
     
     setView(resultsHTML);
-    
-    // Guardar progreso si aprobó
-    if (passed) {
-      if (!userData.progress) userData.progress = {};
-      userData.progress.M1_quiz = 100;
-    }
   }
 
-
-
+  updateQuestion();
 }
-
-  
-
-
-// Hacer la función accesible globalmente
-window.showQuizModule = showQuizModule;
